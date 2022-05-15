@@ -133,15 +133,23 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
 /* -- start of styling -- */
 
-.section-title{
+.section-title {
 	font-size: 2rem;
 	font-weight: 600;
 }
+
 #character-choices {
 	display: flex;
+}
 
+#character-image-container {
+	height: 300px;
+	width: 250px;
+	background-size: cover;
+	background-position: center center;
 }
 
 .character-select-button {
@@ -154,10 +162,17 @@ table {
 	justify-content: center;
 	align-items: flex-end;
 	margin: 0.5rem;
-	box-shadow: 0 3px 6px 0 rgba(0,0,0,0.15);
+	box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.15);
+	transition: box-shadow 500ms;
+	cursor: pointer;
 }
 
-.character-select-button-text{
+
+.character-select-button:hover {
+	box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.45);
+}
+
+.character-select-button-text {
 	background-color: white;
 	padding: 0.5rem 0.75rem;
 	width: 150px;

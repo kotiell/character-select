@@ -17,25 +17,38 @@ const characters = [
 
 characters.forEach((char) => {
   const characterNameEle = document.createElement('div');
-  characterNameEle.className="character-select-button-text";
+  characterNameEle.className = "character-select-button-text";
   characterNameEle.textContent = char.name;
 
   const characterEle = document.createElement('div');
   characterEle.append(characterNameEle);
-  characterEle.className="character-select-button";
-  characterEle.setAttribute('style',`background-image:url(${char.image})`);
-  characterEle.setAttribute('data-char-id',char.id)
+  characterEle.className = "character-select-button";
+  characterEle.setAttribute('style', `background-image:url(${char.image})`);
+  characterEle.setAttribute('data-char-id', char.id)
 
   document.querySelector('#character-choices').append(characterEle);
 });
 
-const characterSelect = (char)=>{
-  document.querySelector('.character-image').src = char.image;
+
+// Displays the selected character at the top of the page
+const characterSelect = (characterId) => {
+  const char = characters.find((character) => {
+    return character.id === characterId;
+  })
+  document.querySelector('#character-image-container').setAttribute('style', `background-image:url(${char.image})`);
   document.querySelector('#selected-character-name').textContent = char.name;
   document.querySelector('#selected-character-sub-title').textContent = char.subTitle;
   DOMPurify(document.querySelector('#selected-character-description').innerHTML = char.description);
+
 }
+
+document.querySelectorAll('.character-select-button').forEach((characterChoice) => {
+  characterChoice.addEventListener('click', (e) => {
+    // the parseInt is to convert the data to a number, otherwise the characterSelect function does not work
+    characterSelect(parseInt(e.target.getAttribute('data-char-id')),10)
+  });
+});
 
 
 // calls the function for the first time
-characterSelect(characters[0])
+characterSelect(1)
