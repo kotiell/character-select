@@ -1,20 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Character Select</title>
-    <link rel="stylesheet" href="styles/styles.css">
-  </head>
-  <body>
-    <div class="container">
-      <div class="character-info">
-        <div class="character-image-container">
-          <img class="character-image" src="" />
-        </div>
-        Character Image
+
+<head>
+  <title>Character Select</title>
+  <link rel="stylesheet" href="styles/styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="selected-character">
+      <div class="character-image-container">
+        <img class="character-image" src="" />
       </div>
-      <div class="character-select">Character Select</div>
+      <div class="character-info">
+        <h2 id="selected-character-name"></h2>
+        <h3 id="selected-character-sub-title"></h3>
+        <div id="selected-character-description">
+          adf
+        </div>
+      </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.8/purify.min.js" integrity="sha512-M72KfQy4kPuLYC6CeTrN0eA17U1lXEMrr5qEJC/40CLdZGC3HpwPS0esQLqBHnxty2FIcuNdP9EqwSOCLEVJXQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="scripts/main.js"></script>
-  </body>
+    <div class="character-select">
+      <h2 class="section-title">Character Select</h2>
+      <div id="character-choices"></div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.8/purify.min.js"
+    integrity="sha512-M72KfQy4kPuLYC6CeTrN0eA17U1lXEMrr5qEJC/40CLdZGC3HpwPS0esQLqBHnxty2FIcuNdP9EqwSOCLEVJXQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="scripts/main.js"></script>
+</body>
+
 </html>
