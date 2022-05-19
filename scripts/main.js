@@ -86,4 +86,6 @@ document.querySelectorAll('.character-select-button').forEach((characterChoice) 
 
 
 // calls the function for the first time
+// you can chose which ever char you want to start with, just change the number to match the ID 
+// of the char
 characterSelect(1)
