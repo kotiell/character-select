@@ -4,15 +4,21 @@ const characters = [
     name: 'KoTiell',
     subTitle: 'Heroic Fighter',
     image: 'images/characters/paladin.png',
-    description: '<p>This is some description text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elementum tellus in nisi blandit, in efficitur ante interdum. Fusce ut consectetur velit. Phasellus vel ligula laoreet, egestas justo at, suscipit mi. Proin pharetra est leo, eu fringilla turpis pulvinar eu. Curabitur egestas lectus ac fringilla efficitur. Mauris risus quam, maximus sit amet tempor sit amet, auctor at lacus. Mauris fringilla tincidunt leo id </p><p>Aliquet. Quisque nisi leo, interdum at malesuada eget, pulvinar nec arcu. Curabitur sit amet tempor metus, sed aliquet ipsum. Fusce fringilla risus in felis dignissim molestie. Cras et dolor id diam sollicitudin aliquet eget bibendum neque. Cras vel vehicula dolor, id aliquet leo. Suspendisse at auctor tellus. Ut maximus commodo pulvinar.</p>'
+    description: '<p>This is some description text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elementum tellus in nisi blandit, in efficitur ante interdum. Fusce ut consectetur velit. Phasellus vel ligula laoreet, egestas justo at, suscipit mi. Proin pharetra est leo, eu fringilla turpis pulvinar eu. Curabitur egestas lectus ac fringilla efficitur. Mauris risus quam, maximus sit amet tempor sit amet, auctor at lacus. Mauris fringilla tincidunt leo id </p><p>Aliquet. Quisque nisi leo, interdum at malesuada eget, pulvinar nec arcu. Curabitur sit amet tempor metus, sed aliquet ipsum. Fusce fringilla risus in felis dignissim molestie. Cras et dolor id diam sollicitudin aliquet eget bibendum neque. Cras vel vehicula dolor, id aliquet leo. Suspendisse at auctor tellus. Ut maximus commodo pulvinar.</p>',
+    sheets: [
+      { level: 1, location: 'downloads/sheets/HumanPaladin/Human_Paladin_1.pdf' },
+      { level: 2, location: 'downloads/sheets/HumanPaladin/Human_Paladin_2.pdf' },
+      { level: 3, location: 'downloads/sheets/HumanPaladin/Human_Paladin_3.pdf' },
+      { level: 4, location: 'downloads/sheets/HumanPaladin/Human_Paladin_4.pdf' },
+    ]
   },
-  {
-    id: 2,
+{
+  id: 2,
     name: 'Theodore',
-    subTitle: 'Young Wizard',
-    image: 'images/characters/wizard.png',
-    description: '<p>This is some description text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elementum tellus in nisi blandit, in efficitur ante interdum. Fusce ut consectetur velit. Phasellus vel ligula laoreet, egestas justo at, suscipit mi. Proin pharetra est leo, eu fringilla turpis pulvinar eu. Curabitur egestas lectus ac fringilla efficitur. Mauris risus quam, maximus sit amet tempor sit amet, auctor at lacus. Mauris fringilla tincidunt leo id </p><p>Aliquet. Quisque nisi leo, interdum at malesuada eget, pulvinar nec arcu. Curabitur sit amet tempor metus, sed aliquet ipsum. Fusce fringilla risus in felis dignissim molestie. Cras et dolor id diam sollicitudin aliquet eget bibendum neque. Cras vel vehicula dolor, id aliquet leo. Suspendisse at auctor tellus. Ut maximus commodo pulvinar.</p>'
-  },
+      subTitle: 'Young Wizard',
+        image: 'images/characters/wizard.png',
+          description: '<p>This is some description text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elementum tellus in nisi blandit, in efficitur ante interdum. Fusce ut consectetur velit. Phasellus vel ligula laoreet, egestas justo at, suscipit mi. Proin pharetra est leo, eu fringilla turpis pulvinar eu. Curabitur egestas lectus ac fringilla efficitur. Mauris risus quam, maximus sit amet tempor sit amet, auctor at lacus. Mauris fringilla tincidunt leo id </p><p>Aliquet. Quisque nisi leo, interdum at malesuada eget, pulvinar nec arcu. Curabitur sit amet tempor metus, sed aliquet ipsum. Fusce fringilla risus in felis dignissim molestie. Cras et dolor id diam sollicitudin aliquet eget bibendum neque. Cras vel vehicula dolor, id aliquet leo. Suspendisse at auctor tellus. Ut maximus commodo pulvinar.</p>'
+},
 ]
 
 characters.forEach((char) => {
@@ -39,13 +45,32 @@ const characterSelect = (characterId) => {
   document.querySelector('#selected-character-name').textContent = char.name;
   document.querySelector('#selected-character-sub-title').textContent = char.subTitle;
   DOMPurify(document.querySelector('#selected-character-description').innerHTML = char.description);
+  if (char.sheets) {
+    const downloadEle = document.createElement('a');
+    downloadEle.textContent = "Download Sheet";
+    downloadEle.setAttribute('href', char.sheets[0].location);
+    const characterSheetsEle = document.createElement('select');
+    char.sheets.forEach((sheet) => {
+      const charSheetSelect = document.createElement('option');
+      charSheetSelect.value = sheet.location;
+      charSheetSelect.textContent = `Level ${sheet.level}`
+      characterSheetsEle.appendChild(charSheetSelect)
+    })
+    const charEle = document.querySelector('.selected-character');
+    charEle.append(characterSheetsEle);
+    charEle.addEventListener('change', (event) =>{
+      downloadEle.setAttribute('href', event.target.value)
+    })
+    downloadEle.setAttribute('download','')
+    charEle.append(downloadEle);
+  }
 
 }
 
 document.querySelectorAll('.character-select-button').forEach((characterChoice) => {
   characterChoice.addEventListener('click', (e) => {
     // the parseInt is to convert the data to a number, otherwise the characterSelect function does not work
-    characterSelect(parseInt(e.target.getAttribute('data-char-id')),10)
+    characterSelect(parseInt(e.target.getAttribute('data-char-id')), 10)
   });
 });
 
