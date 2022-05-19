@@ -12,13 +12,13 @@ const characters = [
       { level: 4, location: 'downloads/sheets/HumanPaladin/Human_Paladin_4.pdf' },
     ]
   },
-{
-  id: 2,
+  {
+    id: 2,
     name: 'Theodore',
-      subTitle: 'Young Wizard',
-        image: 'images/characters/wizard.png',
-          description: '<p>This is some description text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elementum tellus in nisi blandit, in efficitur ante interdum. Fusce ut consectetur velit. Phasellus vel ligula laoreet, egestas justo at, suscipit mi. Proin pharetra est leo, eu fringilla turpis pulvinar eu. Curabitur egestas lectus ac fringilla efficitur. Mauris risus quam, maximus sit amet tempor sit amet, auctor at lacus. Mauris fringilla tincidunt leo id </p><p>Aliquet. Quisque nisi leo, interdum at malesuada eget, pulvinar nec arcu. Curabitur sit amet tempor metus, sed aliquet ipsum. Fusce fringilla risus in felis dignissim molestie. Cras et dolor id diam sollicitudin aliquet eget bibendum neque. Cras vel vehicula dolor, id aliquet leo. Suspendisse at auctor tellus. Ut maximus commodo pulvinar.</p>'
-},
+    subTitle: 'Young Wizard',
+    image: 'images/characters/wizard.png',
+    description: '<p>This is some description text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elementum tellus in nisi blandit, in efficitur ante interdum. Fusce ut consectetur velit. Phasellus vel ligula laoreet, egestas justo at, suscipit mi. Proin pharetra est leo, eu fringilla turpis pulvinar eu. Curabitur egestas lectus ac fringilla efficitur. Mauris risus quam, maximus sit amet tempor sit amet, auctor at lacus. Mauris fringilla tincidunt leo id </p><p>Aliquet. Quisque nisi leo, interdum at malesuada eget, pulvinar nec arcu. Curabitur sit amet tempor metus, sed aliquet ipsum. Fusce fringilla risus in felis dignissim molestie. Cras et dolor id diam sollicitudin aliquet eget bibendum neque. Cras vel vehicula dolor, id aliquet leo. Suspendisse at auctor tellus. Ut maximus commodo pulvinar.</p>'
+  },
 ]
 
 characters.forEach((char) => {
@@ -45,11 +45,15 @@ const characterSelect = (characterId) => {
   document.querySelector('#selected-character-name').textContent = char.name;
   document.querySelector('#selected-character-sub-title').textContent = char.subTitle;
   DOMPurify(document.querySelector('#selected-character-description').innerHTML = char.description);
+
+  //trying a little fallback stuff, if there are no char sheets the system doesn't break down
   if (char.sheets) {
     const downloadEle = document.createElement('a');
     downloadEle.textContent = "Download Sheet";
     downloadEle.setAttribute('href', char.sheets[0].location);
     const characterSheetsEle = document.createElement('select');
+
+    //here we make each option for the select box
     char.sheets.forEach((sheet) => {
       const charSheetSelect = document.createElement('option');
       charSheetSelect.value = sheet.location;
@@ -58,10 +62,16 @@ const characterSelect = (characterId) => {
     })
     const charEle = document.querySelector('.selected-character');
     charEle.append(characterSheetsEle);
-    charEle.addEventListener('change', (event) =>{
+
+    //here we listen for the select box to be updated
+    charEle.addEventListener('change', (event) => {
       downloadEle.setAttribute('href', event.target.value)
     })
-    downloadEle.setAttribute('download','')
+
+    /*
+    this adds the 'download' attribute which just auto downloads things vs opening a new tab or whatever
+    */
+    downloadEle.setAttribute('download', '')
     charEle.append(downloadEle);
   }
 
