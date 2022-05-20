@@ -136,6 +136,9 @@ table {
 
 /* -- start of styling -- */
 
+html,body{
+	font-family: Arial, Helvetica, sans-serif;
+}
 .section-title {
 	font-size: 2rem;
 	font-weight: 600;
@@ -143,6 +146,13 @@ table {
 
 #character-choices {
 	display: flex;
+	margin-left: -0.5rem;
+}
+
+.container{
+	max-width: 1200px;
+	margin: 0 auto;
+	margin-top: 2rem;
 }
 
 #character-image-container {
@@ -150,6 +160,14 @@ table {
 	width: 250px;
 	background-size: cover;
 	background-position: center center;
+	flex-shrink: 0;
+	margin-right: 2rem;
+	border-radius: 4px;
+	box-shadow: 0 3px 6px 0 rgba(0,0,0,0.15);
+}
+
+.character-select{
+	margin-top: 2rem;
 }
 
 .character-select-button {
@@ -173,8 +191,59 @@ table {
 }
 
 .character-select-button-text {
-	background-color: white;
+	background-color: #BC0F0F;
+	color: #fff;
 	padding: 0.5rem 0.75rem;
 	width: 150px;
 	text-align: center;
+	font-weight: 600;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+#selected-character-description p{
+	margin-bottom: 1rem;
+	line-height: 1.4;
+}
+
+.selected-character{
+	display: flex;
+}
+
+#selected-character-name{
+	font-size: 3rem;
+	font-weight: 600;
+}
+
+#selected-character-sub-title{
+	font-size: 1.5rem;
+	margin: 0.5rem 0;
+}
+
+#selected-character-description{
+	margin-bottom: 1rem;
+}
+
+#char-sheets{
+	padding: 0.5rem 0.25rem;
+	font-size: 1.125rem;
+	border-radius: 4px;
+}
+
+.btn{
+	margin-left: 0.75rem;
+	padding: 0.75rem 1.25rem;
+	background-color: #BC0F0F;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 8px;
+	font-weight: 600;
+	box-shadow: 0 3px 6px 0 rgba(0,0,0,0.15);
+	transition: 250ms ease-in-out;
+}
+
+.btn:hover{
+	border-radius: 4px;
+	background-color: #8C0B0B;
+	box-shadow: 0 4px 6px 1px rgba(0,0,0,0.45);
 }

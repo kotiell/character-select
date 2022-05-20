@@ -45,13 +45,16 @@ const characterSelect = (characterId) => {
   document.querySelector('#selected-character-name').textContent = char.name;
   document.querySelector('#selected-character-sub-title').textContent = char.subTitle;
   DOMPurify(document.querySelector('#selected-character-description').innerHTML = char.description);
+  const characterSheetsEle = document.querySelector('#char-sheets');
 
+  while (characterSheetsEle.firstChild) {
+    characterSheetsEle.removeChild(characterSheetsEle.firstChild);
+  }
   //trying a little fallback stuff, if there are no char sheets the system doesn't break down
   if (char.sheets) {
-    const downloadEle = document.createElement('a');
+    const downloadEle = document.querySelector('#char-sheet-download');
     downloadEle.textContent = "Download Sheet";
     downloadEle.setAttribute('href', char.sheets[0].location);
-    const characterSheetsEle = document.createElement('select');
 
     //here we make each option for the select box
     char.sheets.forEach((sheet) => {
@@ -61,7 +64,6 @@ const characterSelect = (characterId) => {
       characterSheetsEle.appendChild(charSheetSelect)
     })
     const charEle = document.querySelector('.selected-character');
-    charEle.append(characterSheetsEle);
 
     //here we listen for the select box to be updated
     charEle.addEventListener('change', (event) => {
@@ -72,7 +74,6 @@ const characterSelect = (characterId) => {
     this adds the 'download' attribute which just auto downloads things vs opening a new tab or whatever
     */
     downloadEle.setAttribute('download', '')
-    charEle.append(downloadEle);
   }
 
 }
